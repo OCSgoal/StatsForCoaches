@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adapting DIGR for Coaching</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Adapting DIGR for Coaching">
+  <meta name="author" content="Tommy O'Brien">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/OCSlogo_dark.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Adapting DIGR for Coaching</h1>
+    <h2>(Or 'Using Stats to Make More Effective Practice Plans')</h2>
+    <p>Tommy O'Brien<br/>OCS Goaltending</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Motivation (Or &#39;Why Am I Reading This?&#39;)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The simple answer is because you want your goalie to be better, but you aren&#39;t a goalie coach (or you are and your goalie isn&#39;t getting better).</p>
+
+<div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px; outline: #000000 solid thick; width: 400px";>
+<font color=#8A0808 size='4'><b>Can't I Just Hire A Goalie Guy?</b></font>
+</div>
+
+<p><font size='3'>
+Yes. Yes you can. Here's our <a href='http://www.ocsgoaltending.com/about-us.html'>contact page</a>. But in all seriousness, we believe that first and foremost, a goalie should be his own best coach. The idea behind the approach we're presenting is to teach them (and you, and whatever goalie guy you have).
+</font></p>
+
+<div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px; outline: #000000 solid thick; width: 400px">
+<font color=#8A0808 size='4'><b>What Do You Mean DIGR? Or Even 'Stats'?</b></font>
+</div>
+
+<p><font size='3'>
+For now, don't worry about what DIGR is specifically, just know that its an advanced statistic in the goalie world. If you don't know what I mean by advanced statistics, you obviously need to play more <a url='http://sports.yahoo.com/fantasy/'>fantasy sports</a>.
+</font></p>
+
+<div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px; outline: #000000 solid thick; width: 400px">
+<font color=#8A0808 size='4'><b>Aren't Stats for Evaluation, Not Development?</b></font>
+</div>
+
+<p><font size='3'>
+Of course they are. Goalies are evaluated using <a href='http://www.nhl.com/stats/'>basic stats</a> and even some <a href='http://www.rosterresource.com/nhl-goalie-power-rankings/'>advanced ones</a>. The point here is to dive into how the stats are calculated and use that process to gain insight into a goalie's strengths and weaknesses. The final stats themselves don't do much for us (unless you want to pay us for scouting, in which case they're our specialty.) 
+</font></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is DIGR?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Defense-Independent Goaltender Rating (DIGR) is an attempt to rank goalies that accounts for the strength of their team&#39;s defense. A very nice paper from the MIT Sloan Conference can be found <a url='http://www.sloansportsconference.com/wp-content/uploads/2011/08/DIGR-A-Defense-Independent-Rating-of-NHL-Goaltenders-using-Spatially-Smoothed-Save-Percentage-Maps.pdf'>here</a> (Poster version <a url='http://www.sloansportsconference.com/wp-content/uploads/2011/08/50-Michael-Schuckers2.pdf'>here</a>).</p>
+
+<h2>How does is work?</h2>
+
+<ol>
+<li>Divide shots faced by each goaltender into bins (e.g. by location or type)</li>
+<li>Use league-wide shot data to find the &#39;average&#39; fraction of shots a goalie faces in each bin</li>
+<li>Use goalie&#39;s shot data to find his/her save percentage for each bin</li>
+<li>Compare how goalie would do against an &#39;average&#39; shot distribution</li>
+</ol>
+
+<h2>The Math...</h2>
+
+<p>While the stat is mostly intuitive, there is some simple math. If math gives you nightmares, but you want to help your goalie despite your shortcomings, gird your loins...</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Deriving DIGR</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>We will use Dr. Schucker&#39;s notation when its convenient, but usually we won&#39;t (sorry Dr. Schuker...&#39;E&#39; is hard to associate with &#39;Shots&#39;). Let \(N\) be the number of shots, \(S\) be the number of saves, and \(b\) be the bin that a certain shot falls into.</p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px; outline: #000000 solid thick;">
+<font color=#8A0808><b>Recast the Save Pct</b></font>
+<font size='4'>
+$$\begin{aligned}
+SV\% &= \frac{S}{N} \nonumber \\
+     &= \sum_{b} \frac{S(b)}{N} \nonumber \\
+     &= \sum_{b} \frac{S(b)}{N(b)}\frac{N(b)}{N} \nonumber \\
+     &\equiv \sum_b \delta(b) \Gamma(b)
+\end{aligned}$$
+</font>
+</div>
+
+</div>
+<div style='float:right;width:48%;'>
+  <div style="background-color: #8A0808; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px; outline: #000000 solid thick;">
+<font color=#FFFFFF><b>Think about what you just did</b></font>
+</div><br>
+
+<font size='4'>We just defined two variables that give a tremendous amount of insight into a goaltender's game (and it took only a few lines and that time-honored tradition in math of multiplying by 1)
+</font>
+
+<p><br>
+<div style="background-color: #F3F781; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+$\delta(b)$ : save percentage of goalie for a $particular$ shot bin
+</div>
+
+<div style="background-color: #F3F781; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+$\Gamma(b)$ : the fraction of shots a goalie faces from a particular bin
+</div>
+
+<p></p></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Finishing with DIGR</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Now replace \(\Gamma(b)\) with \(\overline{\Gamma(b)}\), where the bar means &#39;league average&#39;. Maybe you&#39;ve seen it in that math class you took 20 years ago as \(<\Gamma(b)>\).</p>
+
+<p><p></p>
+
+<div style="background-color: #F3F781; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+\begin{equation}
+DIGR = \sum_b \delta(b) \overline{\Gamma(b)}
+\end{equation}
+</div>
+
+<p><p></p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+<font color=#8A0808><b>Great. Now What?</b></font>
+</div><p><br></p>
+
+<div style="margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+<p>
+The best way to see what this tells us about our (your) goalie is to run through an example calculation. We will use <a href='https://www.r-project.org/'>R</a> for this.
+</p>
+</div>
+
+</div>
+<div style='float:right;width:48%;'>
+  <div style="background-color: #D8D8D8; margin-left: 20px; margin-right: 20px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+<font color=#8A0808><b>What Did We Need?</b></font>
+</div>
+
+<p><br>
+1. Each shot with any bin data you want <br>
+2. A unemployed friend to take said data
+</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Example (Part I: Get and Check Data)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Read all the shots from around the [four team example] league and check the format. Note that the dataset is included with the code to this presentation and is hosted on our gitHub if you feel so inclined.</p>
+
+<pre><code class="r">shotData &lt;- read.csv(&#39;code/SlidifyDatabase.csv&#39;,header=T,sep=&quot;,&quot;)
+head(shotData,n=2)  #This is a comment. Print out the first two rows.
+</code></pre>
+
+<pre><code>##   Goaltender     IceX     IceY Save
+## 1      Brown 49.19338 25.08911   No
+## 2      Brown 59.84767 47.98779  Yes
+</code></pre>
+
+<p>Each shot in this database seems to have an X,Y location it was taken from on the ice as well as the goalie who saved (or didn&#39;t save) it. It would be helpful to know how many shots we have and how many goalies they are distributed across.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Example (Part I: Get and Check Data) Cont&#39;d</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>There&#39;s a long way to do this...</p>
+
+<pre><code class="r">dim(shotData)[1] #dim() returns [rows,cols]. [1] gives just [rows]
+</code></pre>
+
+<pre><code>## [1] 1728
+</code></pre>
+
+<pre><code class="r">unique(shotData$Goaltender) #unique goalie names
+</code></pre>
+
+<pre><code>## [1] Brown   Smith   Jones   Johnson
+## Levels: Brown Johnson Jones Smith
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Example (Part I: Get and Check Data) Cont&#39;d</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>And a short way (if you&#39;re into that stuff)...</p>
+
+<pre><code class="r">aggregate(Save ~ Goaltender, data = shotData, FUN = length)
+</code></pre>
+
+<pre><code>##   Goaltender Save
+## 1      Brown  515
+## 2    Johnson  245
+## 3      Jones  511
+## 4      Smith  457
+</code></pre>
+
+<p>Note that &#39;Save&#39; here means the length of the &#39;Save&#39; column, not the number of saves. The sum should be total number of shots. So it looks like there are four goalies and a total of 1728 shots. Neat. Let&#39;s move on.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <article data-timings="">
+    <style>
+.title-slide {
+  background-color: #D8D8D8; /* #EDE0CF; ; #CA9F9D*/
+}
+.title-slide hgroup > h2 {
+  color: #8A0808 ;  /* ; #EF5150*/
+}
+.title-slide hgroup > h1 {
+  color: #2E2E2E;
+}
+slide:not(.segue) h2{
+  font-family: 'Calibri', Arial, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+  letter-spacing: -2px;
+  line-height: 1.2em;
+  color: #8A0808;
+}
+</style>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Motivation (Or &#39;Why Am I Reading This?&#39;)'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is DIGR?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Deriving DIGR'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Finishing with DIGR'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Example (Part I: Get and Check Data)'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Example (Part I: Get and Check Data) Cont&#39;d'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Example (Part I: Get and Check Data) Cont&#39;d'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='NA'>
+         8
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
